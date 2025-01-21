@@ -73,7 +73,6 @@ combined_df <- data.frame(
   Year = character(),
   hdl = character(),
   doi = character(),
-  type = character(),
   stringsAsFactors = FALSE
 )
 
@@ -117,12 +116,6 @@ for (i in 1:nrow(article_details)) {
     ""
   }
   
-  type <- if (!is.null(citation_data$description)) {
-    (citation_data$description)
-  } else {
-    NA
-  }
-  
   # Append the citation data to the combined data frame
   combined_df <- rbind(combined_df, data.frame(
     collection_title = article_details$collection_title[i],
@@ -132,7 +125,6 @@ for (i in 1:nrow(article_details)) {
     Year = year,
     hdl = hdl,
     doi = doi,
-    type = type,
     stringsAsFactors = FALSE
   ))
 }
@@ -141,6 +133,3 @@ for (i in 1:nrow(article_details)) {
 # Save the final dataset to a CSV file
 output_file <- "combined_data.csv"
 write.csv(combined_df, file = output_file, row.names = FALSE)
-
-
-# Need to work through the description (type field) to extract poster/abstract etc next

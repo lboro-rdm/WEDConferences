@@ -11,7 +11,7 @@ ui <- tags$html(
   fluidPage(
     titlePanel(
       HTML('<span style="color: #002c3d;"><strong>WEDC, Loughborough University:</strong></span>
-          <span style="color: #009BC9;">Books and Manuals</span><br><br>')
+          <span style="color: #009BC9;">Conferences</span><br><br>')
     ),
     
     # CSS to set the background color and font size
@@ -38,7 +38,7 @@ ui <- tags$html(
         # Collection Drop-down
         selectInput(
           inputId = "collectionSelect",
-          label = "Select a Collection:",
+          label = "Select a Conference:",
           choices = NULL,  # Placeholder, will be updated dynamically
           selected = NULL,
           multiple = FALSE

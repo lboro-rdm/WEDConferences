@@ -75,7 +75,7 @@ server <- function(input, output, session) {
           "<div style='margin-bottom: 10px;'>", # Add bottom margin
           "<strong>", link, "</strong>. ", 
           "<span style='color: #002c3d;'>", df$Author[i], ". (", 
-          df$Year[i], "). Loughborough University. Book.</span>",
+          df$Year[i], "). ", df$collection_title[i], "</span>",
           "</div>"
         )
       })
