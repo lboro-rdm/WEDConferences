@@ -7,14 +7,12 @@ library(jsonlite)
 library(dplyr)
 
 ui <- tags$html(
-  lang = "en",  # Set the language attribute
+  lang = "en",
   fluidPage(
     titlePanel(
       HTML('<span style="color: #002c3d;"><strong>WEDC, Loughborough University:</strong></span>
           <span style="color: #009BC9;">Conferences</span><br><br>')
     ),
-    
-    # CSS to set the background color and font size
     tags$head(
       tags$style(HTML("
         body {
@@ -29,37 +27,27 @@ ui <- tags$html(
         }
       "))
     ),
-    
-    # Layout for inputs and outputs
     sidebarLayout(
       sidebarPanel(
         style = "margin-top: 20px;",
-        
-        # Collection Drop-down
         selectInput(
           inputId = "collectionSelect",
           label = "Select a Conference:",
-          choices = NULL,  # Placeholder, will be updated dynamically
+          choices = NULL,
           selected = NULL,
           multiple = FALSE
         ),
-        
-        # Author Search
         textInput(
           inputId = "authorSearch",
           label = "Search by Author:",
           placeholder = "Enter author's name"
         ),
-        
-        # Title Search
         textInput(
           inputId = "titleSearch",
           label = "Search by Title:",
           placeholder = "Enter book or manual title"
         )
-
       ),
-      
       mainPanel(
         fluidRow(
           style = "margin-left: 20px; margin-right: 20px;",

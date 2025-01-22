@@ -23,6 +23,27 @@ server <- function(input, output, session) {
     }
   })
   
+  # Handle URL parameters to preselect a conference
+  observe({
+    query <- parseQueryString(session$clientData$url_search)
+    if (!is.null(query$conference)) {
+      conference_name <- query$conference
+      df <- booksData()
+      if (!is.null(df) && conference_name %in% df$collection_title) {
+        updateSelectInput(session, "collectionSelect", selected = conference_name)
+      }
+    }
+  })
+  
+  # Update the URL when a conference is selected
+  observeEvent(input$collectionSelect, {
+    if (!is.null(input$collectionSelect) && input$collectionSelect != "All") {
+      new_url <- paste0("?conference=", URLencode(input$collectionSelect, reserved = TRUE))
+      updateQueryString(new_url, mode = "replace")
+    } else {
+      updateQueryString("", mode = "replace")
+    }
+  })
   
   # Reactive function to filter books based on inputs
   filteredBooks <- reactive({
@@ -53,7 +74,6 @@ server <- function(input, output, session) {
     
     df
   })
-  
   
   # Reactive function to format the filtered data
   formattedBooks <- reactive({
@@ -86,7 +106,6 @@ server <- function(input, output, session) {
       "No results found."
     }
   })
-  
   
   # Render the filtered and formatted books
   output$bookDetails <- renderUI({
