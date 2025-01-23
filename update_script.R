@@ -6,7 +6,8 @@ library(lubridate)
 # Read collection IDs and titles
 collection_data <- read.csv("collection_ids.csv", stringsAsFactors = FALSE)
 collection_ids <- collection_data$collection_id
-collection_titles <- collection_data$collection_title
+collection_titles <- paste0(collection_data$number, ", ", collection_data$year, " (", collection_data$location, ")")
+
 
 # Initialize a data frame to store results
 article_details <- data.frame(
@@ -128,7 +129,6 @@ for (i in 1:nrow(article_details)) {
     stringsAsFactors = FALSE
   ))
 }
-
 
 # Save the final dataset to a CSV file
 output_file <- "combined_data.csv"

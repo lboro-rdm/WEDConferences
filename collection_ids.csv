@@ -1,44 +1,44 @@
-﻿collection_id,collection_title
-22412,WEDC 1st International Conference
-22415,WEDC 2nd International Conference
-22418,WEDC 3rd International Conference
-22421,WEDC 4th International Conference
-22424,WEDC 5th International Conference
-22427,WEDC 6th International Conference
-22430,WEDC 7th International Conference
-22433,WEDC 8th International Conference
-22436,WEDC 9th International Conference
-22439,WEDC 10th International Conference
-22442,WEDC 11th International Conference
-22445,WEDC 12th International Conference
-22448,WEDC 13th International Conference
-22451,WEDC 14th International Conference
-22454,WEDC 15th International Conference
-22457,WEDC 16th International Conference
-22460,WEDC 17th International Conference
-22463,WEDC 18th International Conference
-22466,WEDC 19th International Conference
-22469,WEDC 20th International Conference
-22472,WEDC 21st International Conference
-22475,WEDC 22nd International Conference
-22478,WEDC 23rd International Conference
-22481,WEDC 24th International Conference
-22484,WEDC 25th International Conference
-22487,WEDC 26th International Conference
-22490,WEDC 27th International Conference
-22493,WEDC 28th International Conference
-22496,WEDC 29th International Conference
-22499,WEDC 30th International Conference
-22502,WEDC 31st International Conference
-22505,WEDC 32nd International Conference
-22508,WEDC 33rd International Conference
-22511,WEDC 34th International Conference
-22514,WEDC 35th International Conference
-22517,WEDC 36th International Conference
-22520,WEDC 37th International Conference
-22523,WEDC 38th International Conference
-22526,WEDC 39th International Conference
-22529,WEDC 40th International Conference
-22532,WEDC 41st International Conference
-36718,WEDC 42nd International Conference
-57540,WEDC 43rd International Conference
+﻿collection_id,number,year,location
+22412,1,1973,"Loughborough, UK"
+22415,2,1975,"Loughborough, UK"
+22418,3,1976,"Loughborough, UK"
+22421,4,1977,"Loughborough, UK"
+22424,5,1979,"Loughborough, UK"
+22427,6,1980,"Zaria, Nigeria"
+22430,7,1981,"Loughborough, UK"
+22433,8,1982,"Madras, India"
+22436,9,1983,"Harare, Zimbabwe"
+22439,10,1984,Singapore
+22442,11,1985,"Dar es Salaam, Tanzania"
+22445,12,1986,"Calcutta, India"
+22448,13,1987,"Lilongwe, Malawi"
+22451,14,1988,"Kuala Lumpur, Malaysia"
+22454,15,1989,"Kano, Nigeria"
+22457,16,1990,"Hyderabad, India"
+22460,17,1991,"Nairobi, Kenya"
+22463,18,1992,"Kathmandu, Nepal"
+22466,19,1993,"Accra, Ghana"
+22469,20,1994,"Colombo, Sri Lanka"
+22472,21,1995,"Kampala, Uganda"
+22475,22,1996,"New Delhi, India"
+22478,23,1997,"Durban, South Africa"
+22481,24,1998,"Islamabad, Pakistan"
+22484,25,1999,"Addis Ababa, Ethiopia"
+22487,26,2000,"Dhaka, Bangladesh"
+22490,27,2001,"Lusaka, Zambia"
+22493,28,2002,"Kolkata (Calcutta), India"
+22496,29,2003,"Abuja, Nigeria"
+22499,30,2004,"Vientiane, Laos"
+22502,31,2005,"Kampala, Uganda"
+22505,32,2006,"Colombo, Sri Lanka"
+22508,33,2008,"Accra, Ghana"
+22511,34,2009,"Addis Ababa, Ethiopia"
+22514,35,2011,"Loughborough, UK"
+22517,36,2013,"Nakuru, Kenya"
+22520,37,2014,"Hanoi, Vietnam"
+22523,38,2015,"Loughborough, UK"
+22526,39,2016,"Kumasi, Ghana"
+22529,40,2017,"Loughborough, UK"
+22532,41,2018,"Nakuru, Kenya"
+36718,42,2021,Online
+57540,43,2024,Online

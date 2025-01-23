@@ -38,7 +38,9 @@ server <- function(input, output, session) {
   # Update the URL when a conference is selected
   observeEvent(input$collectionSelect, {
     if (!is.null(input$collectionSelect) && input$collectionSelect != "All") {
-      new_url <- paste0("?conference=", URLencode(input$collectionSelect, reserved = TRUE))
+      # Extract the part of the string before the first comma
+      conference_number <- sub(",.*", "", input$collectionSelect)
+      new_url <- paste0("?conference=", URLencode(conference_number, reserved = TRUE))
       updateQueryString(new_url, mode = "replace")
     } else {
       updateQueryString("", mode = "replace")
@@ -95,7 +97,7 @@ server <- function(input, output, session) {
           "<div style='margin-bottom: 10px;'>", # Add bottom margin
           "<strong>", link, "</strong>. ", 
           "<span style='color: #002c3d;'>", df$Author[i], ". (", 
-          df$Year[i], "). ", df$collection_title[i], "</span>",
+          df$Year[i], "). Conference no. ", df$collection_title[i], "</span>",
           "</div>"
         )
       })
