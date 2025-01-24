@@ -7,11 +7,12 @@ library(lubridate)
 collection_data <- read.csv("collection_ids.csv", stringsAsFactors = FALSE)
 collection_ids <- collection_data$collection_id
 collection_titles <- paste0(collection_data$number, ", ", collection_data$year, " (", collection_data$location, ")")
-
+conference_ids <- collection_data$number
 
 # Initialize a data frame to store results
 article_details <- data.frame(
   collection_title = character(),
+  conference_id = character(),
   article_id = character(),
   title = character(),
   stringsAsFactors = FALSE
@@ -21,7 +22,7 @@ article_details <- data.frame(
 base_url <- "https://api.figshare.com/v2/articles?group="
 
 # Function to fetch articles from a collection
-fetch_articles_from_collection <- function(collection_id, collection_title) {
+fetch_articles_from_collection <- function(collection_id, collection_title, conference_id) {
   articles_url <- paste0(base_url, collection_id, "&page_size=1000")
   print(articles_url)
   articles_response <- GET(articles_url)
@@ -33,15 +34,16 @@ fetch_articles_from_collection <- function(collection_id, collection_title) {
   
   articles <- fromJSON(content(articles_response, as = "text"))
   
-  if (length(articles) == 0) {
+  if (is.null(articles) || length(articles) == 0) {
     message("No articles found for collection: ", collection_title)
     return(NULL)
   }
   
-  # Extract article IDs and titles
+  # Convert conference_id to character to ensure consistency
   data.frame(
     collection_title = collection_title,
-    article_id = as.character(articles$id),  # Ensure article_id is a character
+    conference_id = as.character(conference_id),  # Explicit conversion to character
+    article_id = as.character(articles$id),
     title = articles$title,
     stringsAsFactors = FALSE
   )
@@ -51,10 +53,11 @@ fetch_articles_from_collection <- function(collection_id, collection_title) {
 for (i in seq_along(collection_ids)) {
   collection_id <- collection_ids[i]
   collection_title <- collection_titles[i]
+  conference_id <- conference_ids[i]
   message("Fetching articles for collection: ", collection_title)
   
   # Fetch articles for the current collection
-  collection_articles <- fetch_articles_from_collection(collection_id, collection_title)
+  collection_articles <- fetch_articles_from_collection(collection_id, collection_title, conference_id)
   
   # If articles were fetched successfully, bind them to the main data frame
   if (!is.null(collection_articles)) {
@@ -68,6 +71,7 @@ endpoint2 <- "https://api.figshare.com/v2/articles/"
 # Initialize a data frame to store citation data
 combined_df <- data.frame(
   collection_title = character(),
+  conference_id = character(),
   article_id = character(),
   title = character(),
   Author = character(),
@@ -122,6 +126,7 @@ for (i in 1:nrow(article_details)) {
     collection_title = article_details$collection_title[i],
     article_id = article_id,
     title = article_details$title[i],
+    conference_id = article_details$conference_id[i],  # Correctly link conference_id
     Author = Author,
     Year = year,
     hdl = hdl,
