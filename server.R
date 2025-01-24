@@ -14,10 +14,15 @@ server <- function(input, output, session) {
   observe({
     df <- booksData()
     if (!is.null(df)) {
+      # Create a named vector where names are conference_ids and values are full titles
+      choices <- setNames(df$collection_title, df$conference_id)
+      choices <- unique(choices)  # Keep only unique titles
+      choices <- c("All" = "All", choices)  # Add "All" option at the beginning
+      
       updateSelectInput(
         session,
         "collectionSelect",
-        choices = c("All", unique(df$collection_title)),  # Add "All" option
+        choices = choices,  # Use the named vector for choices
         selected = "All"
       )
     }
@@ -27,9 +32,11 @@ server <- function(input, output, session) {
   observe({
     query <- parseQueryString(session$clientData$url_search)
     if (!is.null(query$conference)) {
-      conference_name <- query$conference
+      conference_id <- query$conference  # Get conference_id from the URL
       df <- booksData()
-      if (!is.null(df) && conference_name %in% df$collection_title) {
+      if (!is.null(df) && conference_id %in% df$conference_id) {
+        # Get the corresponding conference name
+        conference_name <- df$collection_title[df$conference_id == conference_id]
         updateSelectInput(session, "collectionSelect", selected = conference_name)
       }
     }
@@ -38,14 +45,23 @@ server <- function(input, output, session) {
   # Update the URL when a conference is selected
   observeEvent(input$collectionSelect, {
     if (!is.null(input$collectionSelect) && input$collectionSelect != "All") {
-      # Extract the part of the string before the first comma
-      conference_number <- sub(",.*", "", input$collectionSelect)
-      new_url <- paste0("?conference=", URLencode(conference_number, reserved = TRUE))
-      updateQueryString(new_url, mode = "replace")
+      # Get the selected conference title
+      selected_conference_title <- input$collectionSelect
+      
+      # Get the conference ID that corresponds to the selected title
+      df <- booksData()
+      conference_id <- df$conference_id[df$collection_title == selected_conference_title][1]  # Get the first match
+      
+      if (!is.null(conference_id) && length(conference_id) > 0) {
+        # Set the new URL to just the conference ID
+        new_url <- paste0("?conference=", URLencode(as.character(conference_id), reserved = TRUE))
+        updateQueryString(new_url, mode = "replace")  # Replace the existing URL
+      }
     } else {
-      updateQueryString("", mode = "replace")
+      updateQueryString("", mode = "replace")  # Clear the URL when "All" is selected
     }
   })
+  
   
   # Reactive function to filter books based on inputs
   filteredBooks <- reactive({
